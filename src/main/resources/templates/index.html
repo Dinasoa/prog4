@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link th:href="@{/styles/styles.css}" rel="stylesheet">
+</head>
+<body>
+<h1>List of Employees</h1>
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birthdate</th>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.birthDate}"></td>
+    </tr>
+</table>
+
+<h2>Add Employee</h2>
+<form th:action="@{/addEmployee}" th:object="${newEmployee}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}"/><br/>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}"/><br/>
+
+    <label for="birthDate">Date of Birth:</label>
+    <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
+
+    <input type="submit" value="Add Employee"/>
+</form>
+</body>
+</html>
