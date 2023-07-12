@@ -9,11 +9,13 @@
 <h1>List of Employees</h1>
 <table>
     <tr>
+        <th>Profile Picture</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Birthdate</th>
     </tr>
     <tr th:each="employee : ${employees}">
+        <td th:text="${employee.picture}"></td>
         <td th:text="${employee.firstName}"></td>
         <td th:text="${employee.lastName}"></td>
         <td th:text="${employee.birthDate}"></td>
@@ -21,7 +23,7 @@
 </table>
 
 <h2>Add Employee</h2>
-<form th:action="@{/addEmployee}" th:object="${newEmployee}" method="post">
+<form th:action="@{/addEmployee}" th:object="${newEmployee}" method="post" enctype="multipart/form-data">
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" th:field="*{firstName}"/><br/>
 
@@ -31,7 +33,11 @@
     <label for="birthDate">Date of Birth:</label>
     <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
 
+    <label for="profileImage">Profile Image:</label>
+    <input type="file" id="profileImage" name="profileImage" th:field="*{picture}"/><br/>
+
     <input type="submit" value="Add Employee"/>
 </form>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
-package com.example.prog4.Service;
+package com.example.prog4.service;
 
-import com.example.prog4.Model.Employee;
+import com.example.prog4.model.Employee;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
