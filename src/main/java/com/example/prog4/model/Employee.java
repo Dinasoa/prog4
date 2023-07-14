@@ -14,7 +14,7 @@ import lombok.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
     private String matricule;
     private String firstName;
     private String lastName;
