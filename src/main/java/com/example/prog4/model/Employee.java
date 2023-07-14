@@ -19,6 +19,6 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String birthDate;
-    @Lob
-    private byte[] picture;
+    @Column(columnDefinition = "text")
+    private String picture;
 }

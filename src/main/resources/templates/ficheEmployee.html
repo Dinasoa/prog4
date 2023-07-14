@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee</title>
+    <link th:href="@{/styles/styles.css}" rel="stylesheet">
+</head>
+<body>
+<table>
+  <tr>
+    <th>Profile Picture</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Birthdate</th>
+    <th>Matricule</th>
+  </tr>
+  <tr th:each="employee : ${employee}">
+    <td>
+      <img th:src="'data:image/jpeg;base64,' + ${employee.picture}"/>
+    </td>
+    <td th:text="${employee.firstName}"></td>
+    <td th:text="${employee.lastName}"></td>
+    <td th:text="${employee.birthDate}"></td>
+    <td th:text="${employee.matricule}"></td>
+  </tr>
+</table>
+</body>
+</html>
