@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Employee</title>
+</head>
+<body>
+<h1>Edit Employee</h1>
+<form th:action="@{/employees/{id}/edit(id=${employee.id})}" th:object="${employee}" method="post">
+  <input type="hidden" th:field="*{id}">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" th:field="*{firstName}"/><br/>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" th:field="*{lastName}"/><br/>
+
+  <label for="birthDate">Date of Birth:</label>
+  <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
+
+  <label for="profileImage">Profile Image:</label>
+  <input type="file" id="profileImage" name="profileImage" th:field="*{picture}"/><br/>
+
+  <input type="submit" value="Edit"/>
+</form>
+</body>
+</html>

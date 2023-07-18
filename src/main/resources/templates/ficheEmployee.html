@@ -13,6 +13,7 @@
     <th>Last Name</th>
     <th>Birthdate</th>
     <th>Matricule</th>
+    <th>Edit</th>
   </tr>
   <tr th:each="employee : ${employee}">
     <td>
@@ -22,6 +23,7 @@
     <td th:text="${employee.lastName}"></td>
     <td th:text="${employee.birthDate}"></td>
     <td th:text="${employee.matricule}"></td>
+    <td><a th:href="@{/employees/{id}/edit(id=${employee.id})}">Edit</a></td>
   </tr>
 </table>
 </body>

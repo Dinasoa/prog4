@@ -27,11 +27,28 @@ public class EmployeeController {
         return "index";
     }
 
+
     @PostMapping("/addEmployee")
-    public String addEmployee(@ModelAttribute("newEmployee") RestEmployee newEmployee) throws IOException {
+    public String addEmployee(Model model, @ModelAttribute("newEmployee") RestEmployee newEmployee) throws IOException {
         service.createEmployee(mapper.toDomain(newEmployee));
+        model.addAttribute("newEmployee", new Employee());
         return "redirect:/";
     }
+
+    @GetMapping("/employees/{id}/edit")
+    public String editEmployee(@PathVariable("id") Integer id, Model model) {
+        Employee employee = service.getById(id);
+        model.addAttribute("employee", employee);
+        return "editEmployee";
+    }
+
+    @PostMapping("/employees/{id}/edit")
+    public String updateEmployee(@PathVariable("id") Integer id, @ModelAttribute("employee") Employee updatedEmployee) {
+        Employee employee = service.getById(id);
+        service.createEmployee(updatedEmployee);
+        return "redirect:/";
+    }
+
 
     @GetMapping("/employee-details/{id}")
     public String getEmployeeById(Model model, @PathVariable Integer id){
