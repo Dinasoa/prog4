@@ -15,6 +15,15 @@
         <th>Last Name</th>
         <th>Birthdate</th>
         <th>Matricule</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Personal Email</th>
+        <th>Profesional Email</th>
+        <th>CIN</th>
+        <th>Position</th>
+        <th>Number Children</th>
+        <th>Socio-Professional Category</th>
+        <th>CNAPS</th>
         <th>Details</th>
     </tr>
     <tr th:each="employee : ${employees}">
@@ -25,8 +34,17 @@
         <td th:text="${employee.lastName}"></td>
         <td th:text="${employee.birthDate}"></td>
         <td th:text="${employee.matricule}"></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.emailPerso}"></td>
+        <td th:text="${employee.emailPro}"></td>
+        <td th:text="${employee.CIN}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.childrenNumber}"></td>
+        <td th:text="${employee.categorieSocioProfesional}"></td>
+        <td th:text="${employee.cnapsNumber}"></td>
         <td>
-            <a th:href="@{/employee-details/{id}(id=${employee.id})}">View Details</a>
+            <a th:href="@{/employee-informations/{id}(id=${employee.id})}">View Details</a>
         </td>
     </tr>
 </table>
@@ -41,6 +59,33 @@
 
     <label for="birthDate">Date of Birth:</label>
     <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/><br/>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" th:field="*{address}"/><br/>
+
+    <label for="emailPerso">Email Perso:</label>
+    <input type="text" id="emailPerso" th:field="*{emailPerso}"/><br/>
+
+    <label for="emailPro">Email Pro:</label>
+    <input type="text" id="emailPro" th:field="*{emailPro}"/><br/>
+
+    <label for="CIN">CIN:</label>
+    <input type="text" id="CIN" th:field="*{CIN}"/><br/>
+
+    <label for="position">Position:</label>
+    <input type="text" id="position" th:field="*{position}"/><br/>
+
+    <label for="childrenNumber">Children Number:</label>
+    <input type="text" id="childrenNumber" th:field="*{childrenNumber}"/><br/>
+
+    <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
+    <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>
+
+    <label for="cnapsNumber">CNAPS:</label>
+    <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>
 
     <label for="profileImage">Profile Image:</label>
     <input type="file" id="profileImage" name="profileImage" th:field="*{picture}"/><br/>

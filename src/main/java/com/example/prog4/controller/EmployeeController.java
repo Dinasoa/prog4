@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -44,13 +43,12 @@ public class EmployeeController {
 
     @PostMapping("/employees/{id}/edit")
     public String updateEmployee(@PathVariable("id") Integer id, @ModelAttribute("employee") Employee updatedEmployee) {
-        Employee employee = service.getById(id);
         service.createEmployee(updatedEmployee);
         return "redirect:/";
     }
 
 
-    @GetMapping("/employee-details/{id}")
+    @GetMapping("/employee-informations/{id}")
     public String getEmployeeById(Model model, @PathVariable Integer id){
         if(id != null){
         Employee employee =  service.getById(id);
