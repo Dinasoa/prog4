@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ViewEmployee {
+    private int id;
     private String matricule;
     private String firstName;
     private String lastName;
@@ -20,10 +22,14 @@ public class ViewEmployee {
     private String address;
     private String emailPerso;
     private String emailPro;
-    private String CIN;
+    private int CINNumber;
+    private String CINPLace;
+    private String CINDate;
     private String position;
     private int childrenNumber;
-    private String categorieSocioProfessionnelle;
+    private String CSP;
     private int cnapsNumber;
+    private String hiringDate;
+    private String departureDate;
     private String sexe;
 }

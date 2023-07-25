@@ -19,13 +19,16 @@
         <th>Address</th>
         <th>Personal Email</th>
         <th>Profesional Email</th>
-        <th>CIN</th>
+        <th>CINDate</th>
+        <th>CINNumber</th>
+        <th>CINPlace</th>
         <th>Position</th>
-        <th>Number Children</th>
+        <th>Children in charge</th>
         <th>Socio-Professional Category</th>
         <th>CNAPS</th>
         <th>Departure Date</th>
         <th>Hiring Date</th>
+        <th>SEXE</th>
         <th>Details</th>
     </tr>
     <tr th:each="employee : ${employees}">
@@ -40,13 +43,16 @@
         <td th:text="${employee.address}"></td>
         <td th:text="${employee.emailPerso}"></td>
         <td th:text="${employee.emailPro}"></td>
-<!--        <td th:text="${employee.CIN}"></td>-->
+        <td th:text="${employee.CINDate}"></td>
+        <td th:text="${employee.CINNumber}"></td>
+        <td th:text="${employee.CINPLace}"></td>
         <td th:text="${employee.position}"></td>
         <td th:text="${employee.childrenNumber}"></td>
-        <td th:text="${employee.categorieSocioProfesional}"></td>
+        <td th:text="${employee.CSP}"></td>
         <td th:text="${employee.cnapsNumber}"></td>
         <td th:text="${employee.departureDate}"></td>
         <td th:text="${employee.hiringDate}"></td>
+        <td th:text="${employee.sexe}"></td>
         <td>
             <a th:href="@{/employee-informations/{id}(id=${employee.id})}">View Details</a>
         </td>
@@ -76,6 +82,12 @@
     <label for="emailPro">Email Pro:</label>
     <input type="text" id="emailPro" th:field="*{emailPro}"/><br/>
 
+    <label for="DepartureDate">Departure Date:</label>
+    <input type="date" id="DepartureDate" th:field="*{departureDate}"/><br/>
+
+    <label for="HiringDate">Hiring Date:</label>
+    <input type="date" id="HiringDate" th:field="*{hiringDate}"/><br/>
+
     <label for="CINDate">CIN_DATE:</label>
     <input type="date" id="CINDate" th:field="*{CINDate}"/><br/>
 
@@ -94,6 +106,7 @@
     <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
 <!--    <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>-->
 
+<!--    TODO: DISPLAY CATEGORIE PROFESSIONNELLE -->
     <select id="categorieSocioProfesional" th:field="*{categorieSocioProfessionnelle}">
         <option th:each="category : ${categoriesList}" th:value="${category}" th:text="${category}"></option>
     </select><br/>

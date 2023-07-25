@@ -25,10 +25,12 @@ public class EmployeeController {
     @GetMapping("/")
     public String index(Model model) {
         List<Employee> employees = service.getAllEmployees();
+        List<ViewEmployee> viewEmployees = service.getAllEmployees()
+                .stream().map(employee -> mapper.toViewEmployee(employee)).toList();
         List<String> categoriesList = service.getAllCSP();
 
         model.addAttribute("categoriesList", categoriesList);
-        model.addAttribute("employees", employees);
+        model.addAttribute("employees", viewEmployees);
         model.addAttribute("newEmployee", new CreateEmployee());
         return "index";
     }
@@ -43,14 +45,15 @@ public class EmployeeController {
 
     @GetMapping("/employees/{id}/edit")
     public String editEmployee(@PathVariable("id") Integer id, Model model) {
-        Employee employee = service.getById(id);
+        CreateEmployee employee = mapper.toCreateEmployee(service.getById(id));
         model.addAttribute("employee", employee);
         return "editEmployee";
     }
 
     @PostMapping("/employees/{id}/edit")
-    public String updateEmployee(@PathVariable("id") Integer id, @ModelAttribute("employee") Employee updatedEmployee) throws IOException {
-        service.createEmployee(updatedEmployee);
+    public String updateEmployee(Model model, @PathVariable("id") Integer id, @ModelAttribute("employee") CreateEmployee updatedEmployee) throws IOException {
+        service.createEmployee(mapper.toDomain(updatedEmployee));
+        model.addAttribute("newEmployee", new CreateEmployee());
         return "redirect:/";
     }
 
@@ -58,7 +61,7 @@ public class EmployeeController {
     @GetMapping("/employee-informations/{id}")
     public String getEmployeeById(Model model, @PathVariable Integer id){
         if(id != null){
-        Employee employee =  service.getById(id);
+        ViewEmployee employee =  mapper.toViewEmployee(service.getById(id));
          model.addAttribute("employee", employee);
         }
         return "ficheEmployee";

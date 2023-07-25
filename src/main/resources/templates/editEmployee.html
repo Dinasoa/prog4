@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Edit Employee</h1>
-<form th:action="@{/employees/{id}/edit(id=${employee.id})}" th:object="${employee}" method="post">
+<form th:action="@{/employees/{id}/edit(id=${employee.id})}" th:object="${employee}" method="post" enctype="multipart/form-data">
   <input type="hidden" th:field="*{id}">
   <label for="firstName">First Name:</label>
   <input type="text" id="firstName" th:field="*{firstName}"/><br/>
@@ -32,8 +32,22 @@
   <label for="emailPro">Email Pro:</label>
   <input type="text" id="emailPro" th:field="*{emailPro}"/><br/>
 
-  <label for="CIN">CIN:</label>
-  <input type="text" id="CIN" th:field="*{CIN}"/><br/>
+
+  <label for="DepartureDate">Departure Date:</label>
+  <input type="date" id="DepartureDate" th:field="*{departureDate}"/><br/>
+
+  <label for="HiringDate">Hiring Date:</label>
+  <input type="date" id="HiringDate" th:field="*{hiringDate}"/><br/>
+
+
+  <label for="CINDate">CINDate:</label>
+  <input type="date" id="CINDate" th:field="*{CINDate}"/><br/>
+
+  <label for="CINPlace">CINPlace:</label>
+  <input type="date" id="CINPlace" th:field="*{CINPLace}"/><br/>
+
+  <label for="CINNumber">CIN_NUMBER:</label>
+  <input type="text" id="CINNumber" th:field="*{CINNUmber}"/><br/>
 
   <label for="position">Position:</label>
   <input type="text" id="position" th:field="*{position}"/><br/>
@@ -42,10 +56,13 @@
   <input type="text" id="childrenNumber" th:field="*{childrenNumber}"/><br/>
 
   <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
-  <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>
+  <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfessionnelle}"/><br/>
 
   <label for="cnapsNumber">CNAPS:</label>
   <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>
+
+  <label for="sexe">SEXE (H/F):</label>
+  <input type="text" id="sexe" th:field="*{sexe}"/><br/>
 
   <input type="submit" value="Edit"/>
 </form>

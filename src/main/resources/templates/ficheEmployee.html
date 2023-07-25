@@ -17,11 +17,15 @@
     <th>Address</th>
     <th>Personal Email</th>
     <th>Profesional Email</th>
-    <th>CIN</th>
+    <th>CINDate</th>
+    <th>CINNUmber</th>
+    <th>CINPlace</th>
     <th>Position</th>
     <th>Number Children</th>
     <th>Socio-Professional Category</th>
     <th>CNAPS</th>
+    <th>Departure Date</th>
+    <th>Hiring Date</th>
     <th>SEXE</th>
     <th>Edit</th>
   </tr>
@@ -37,11 +41,15 @@
     <td th:text="${employee.address}"></td>
     <td th:text="${employee.emailPerso}"></td>
     <td th:text="${employee.emailPro}"></td>
-    <td th:text="${employee.CIN}"></td>
+    <td th:text="${employee.CINDate}"></td>
+    <td th:text="${employee.CINNumber}"></td>
+    <td th:text="${employee.CINPLace}"></td>
     <td th:text="${employee.position}"></td>
     <td th:text="${employee.childrenNumber}"></td>
-    <td th:text="${employee.categorieSocioProfesional}"></td>
+    <td th:text="${employee.CSP}"></td>
     <td th:text="${employee.cnapsNumber}"></td>
+    <td th:text="${employee.departureDate}"></td>
+    <td th:text="${employee.hiringDate}"></td>
     <td th:text="${employee.sexe}"></td>
     <td><a th:href="@{/employees/{id}/edit(id=${employee.id})}">Edit</a></td>
   </tr>

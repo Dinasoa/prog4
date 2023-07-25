@@ -8,5 +8,14 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-
+    List<Employee> findAllByFirstNameContainingAndLastNameContainingAndSexeAndPositionContainingAndHiringDateBetweenAndDepartureDateBetween(
+            String firstName,
+            String lastName,
+            Employee.Sexe sex,
+            String position,
+            String hiringDateStart,
+            String hiringDateEnd,
+            String departureDateStart,
+            String departureDateEnd
+    );
 }

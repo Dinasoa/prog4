@@ -10,11 +10,13 @@ import com.example.prog4.repository.PhoneNumberRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -24,23 +26,56 @@ public class EmployeeMapper {
     private PhoneNumberRepository phoneNumberRepository;
     private CINRepository cinRepository;
 
-//    public ViewEmployee toViewEmployee(Employee employee){
-//        return ViewEmployee.builder()
-//                .categorieSocioProfessionnelle(String.valueOf(employee.getCategorieSocioProfesional()))
+
+    public CreateEmployee toCreateEmployee(Employee employee){
+        return CreateEmployee.builder()
+                .id(employee.getId())
+                .matricule(employee.getMatricule())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .birthDate(employee.getBirthDate())
 //                .picture(employee.getPicture())
-//                .address(employee.getAddress())
-//                .sexe(String.valueOf(employee.getSexe()))
-//                .emailPerso(employee.getEmailPerso())
-//                .firstName(employee.getFirstName())
-//                .lastName(employee.getLastName())
-//                .birthDate(employee.getBirthDate())
-//                .CIN(String.valueOf(employee.getCIN()))
-//                .matricule(employee.getMatricule())
-//                .position(employee.getPosition())
-//                .phoneNumber(employee.getPhoneNumber().get(0).getPhoneNumber())
-//                .cnapsNumber(employee.getCnapsNumber())
-//                .build();
-//    }
+                .phoneNumber(employee.getPhoneNumber().get(0).getPhoneNumber())
+                .address(employee.getAddress())
+                .emailPerso(employee.getEmailPerso())
+                .emailPro(employee.getEmailPro())
+                .CINDate(employee.getCIN().getIssueDate())
+                .CINDate(employee.getCIN() != null ? employee.getCIN().getIssueDate() : null)
+                .CINNUmber(employee.getCIN() != null ? Optional.ofNullable(employee.getCIN().getNumber()).orElse(null) : null)
+                .CINPLace(employee.getCIN() != null ? employee.getCIN().getIssuePlace() : null)
+                .position(employee.getPosition())
+                .childrenNumber(employee.getChildrenNumber())
+//                .categorieSocioProfessionnelle(String.valueOf(employee.getCategorieSocioProfesional()))
+                .cnapsNumber(employee.getCnapsNumber())
+                .hiringDate(employee.getHiringDate())
+                .departureDate(employee.getDepartureDate())
+                .sexe(String.valueOf(employee.getSexe()))
+                .build();
+    }
+    public ViewEmployee toViewEmployee(Employee employee){
+        return ViewEmployee.builder()
+                .id(employee.getId())
+                .CSP(String.valueOf(employee.getCategorieSocioProfesional()))
+                .picture(employee.getPicture())
+                .address(employee.getAddress())
+                .sexe(String.valueOf(employee.getSexe()))
+                .emailPerso(employee.getEmailPerso())
+                .emailPro(employee.getEmailPro())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .birthDate(employee.getBirthDate())
+                .CINDate(employee.getCIN() != null ? employee.getCIN().getIssueDate() : null)
+                .CINNumber(employee.getCIN() != null ? Optional.ofNullable(employee.getCIN().getNumber()).orElse(null) : null)
+                .CINPLace(employee.getCIN() != null ? employee.getCIN().getIssuePlace() : null)
+                .matricule(employee.getMatricule())
+                .position(employee.getPosition())
+                .phoneNumber(String.valueOf(employee.getPhoneNumber().get(0).getPhoneNumber()))
+                .cnapsNumber(employee.getCnapsNumber())
+                .departureDate(employee.getDepartureDate())
+                .hiringDate(employee.getHiringDate())
+                .matricule(employee.getMatricule())
+                .build();
+    }
 
     public Employee toDomain(CreateEmployee rest) throws IOException {
         byte[] imageBytes = rest.getPicture().getBytes();

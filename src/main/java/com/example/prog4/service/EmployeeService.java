@@ -24,6 +24,28 @@ public class EmployeeService {
         return repository.findById(id).get();
     }
 
+    public List<Employee> getFilteredEmployees(
+            String firstName,
+            String lastName,
+            Employee.Sexe sex,
+            String position,
+            String hiringDateStart,
+            String hiringDateEnd,
+            String departureDateStart,
+            String departureDateEnd
+    ) {
+        return repository.findAllByFirstNameContainingAndLastNameContainingAndSexeAndPositionContainingAndHiringDateBetweenAndDepartureDateBetween(
+                firstName,
+                lastName,
+                sex,
+                position,
+                hiringDateStart,
+                hiringDateEnd,
+                departureDateStart,
+                departureDateEnd
+        );
+    }
+
     public List<String> getAllCSP(){
         List<String> CSP = new ArrayList<>();
         CSP.add("AGRICULTURAL_WORKERS");
