@@ -13,6 +13,16 @@
     <th>Last Name</th>
     <th>Birthdate</th>
     <th>Matricule</th>
+    <th>Phone Number</th>
+    <th>Address</th>
+    <th>Personal Email</th>
+    <th>Profesional Email</th>
+    <th>CIN</th>
+    <th>Position</th>
+    <th>Number Children</th>
+    <th>Socio-Professional Category</th>
+    <th>CNAPS</th>
+    <th>SEXE</th>
     <th>Edit</th>
   </tr>
   <tr th:each="employee : ${employee}">
@@ -23,6 +33,16 @@
     <td th:text="${employee.lastName}"></td>
     <td th:text="${employee.birthDate}"></td>
     <td th:text="${employee.matricule}"></td>
+    <td th:text="${employee.phoneNumber}"></td>
+    <td th:text="${employee.address}"></td>
+    <td th:text="${employee.emailPerso}"></td>
+    <td th:text="${employee.emailPro}"></td>
+    <td th:text="${employee.CIN}"></td>
+    <td th:text="${employee.position}"></td>
+    <td th:text="${employee.childrenNumber}"></td>
+    <td th:text="${employee.categorieSocioProfesional}"></td>
+    <td th:text="${employee.cnapsNumber}"></td>
+    <td th:text="${employee.sexe}"></td>
     <td><a th:href="@{/employees/{id}/edit(id=${employee.id})}">Edit</a></td>
   </tr>
 </table>

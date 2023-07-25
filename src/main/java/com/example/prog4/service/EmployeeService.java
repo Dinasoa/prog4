@@ -5,6 +5,7 @@ import com.example.prog4.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,5 +22,15 @@ public class EmployeeService {
 
     public Employee getById(Integer id){
         return repository.findById(id).get();
+    }
+
+    public List<String> getAllCSP(){
+        List<String> CSP = new ArrayList<>();
+        CSP.add("AGRICULTURAL_WORKERS");
+        CSP.add("CRAFTSMEN_AND_ARTISANS");
+        CSP.add("TRADERS_AND_MERCHANTS");
+        CSP.add("CIVIL_SERVANTS_AND_PROFESSIONALS");
+        CSP.add("UNSKILLED_LABORERS");
+        return CSP;
     }
 }

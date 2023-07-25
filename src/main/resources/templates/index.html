@@ -24,6 +24,8 @@
         <th>Number Children</th>
         <th>Socio-Professional Category</th>
         <th>CNAPS</th>
+        <th>Departure Date</th>
+        <th>Hiring Date</th>
         <th>Details</th>
     </tr>
     <tr th:each="employee : ${employees}">
@@ -38,11 +40,13 @@
         <td th:text="${employee.address}"></td>
         <td th:text="${employee.emailPerso}"></td>
         <td th:text="${employee.emailPro}"></td>
-        <td th:text="${employee.CIN}"></td>
+<!--        <td th:text="${employee.CIN}"></td>-->
         <td th:text="${employee.position}"></td>
         <td th:text="${employee.childrenNumber}"></td>
         <td th:text="${employee.categorieSocioProfesional}"></td>
         <td th:text="${employee.cnapsNumber}"></td>
+        <td th:text="${employee.departureDate}"></td>
+        <td th:text="${employee.hiringDate}"></td>
         <td>
             <a th:href="@{/employee-informations/{id}(id=${employee.id})}">View Details</a>
         </td>
@@ -72,26 +76,40 @@
     <label for="emailPro">Email Pro:</label>
     <input type="text" id="emailPro" th:field="*{emailPro}"/><br/>
 
-    <label for="CIN">CIN:</label>
-    <input type="text" id="CIN" th:field="*{CIN}"/><br/>
+    <label for="CINDate">CIN_DATE:</label>
+    <input type="date" id="CINDate" th:field="*{CINDate}"/><br/>
+
+    <label for="CINPlace">CIN_PLACE:</label>
+    <input type="text" id="CINPlace" th:field="*{CINPLace}"/><br/>
+
+    <label for="CINNumber">CIN_NUMBER:</label>
+    <input type="text" id="CINNumber" th:field="*{CINNUmber}"/><br/>
 
     <label for="position">Position:</label>
     <input type="text" id="position" th:field="*{position}"/><br/>
 
-    <label for="childrenNumber">Children Number:</label>
+    <label for="childrenNumber">Children in Charge:</label>
     <input type="text" id="childrenNumber" th:field="*{childrenNumber}"/><br/>
 
     <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
-    <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>
+<!--    <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>-->
+
+    <select id="categorieSocioProfesional" th:field="*{categorieSocioProfessionnelle}">
+        <option th:each="category : ${categoriesList}" th:value="${category}" th:text="${category}"></option>
+    </select><br/>
 
     <label for="cnapsNumber">CNAPS:</label>
     <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>
+
+    <label for="sexe">SEXE (H/F):</label>
+    <input type="text" id="sexe" th:field="*{sexe}"/><br/>
 
     <label for="profileImage">Profile Image:</label>
     <input type="file" id="profileImage" name="profileImage" th:field="*{picture}"/><br/>
 
     <input type="submit" value="Add Employee"/>
 </form>
+
 
 </body>
 </html>

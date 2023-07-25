@@ -1,19 +1,23 @@
 package com.example.prog4.controller;
 
-import com.example.prog4.controller.rest.RestEmployee;
+import com.example.prog4.controller.viewModel.CreateEmployee;
+import com.example.prog4.controller.viewModel.ViewEmployee;
 import com.example.prog4.mapper.EmployeeMapper;
 import com.example.prog4.model.Employee;
 import com.example.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
+@Slf4j
 public class EmployeeController {
     private EmployeeService service;
     private EmployeeMapper mapper;
@@ -21,16 +25,19 @@ public class EmployeeController {
     @GetMapping("/")
     public String index(Model model) {
         List<Employee> employees = service.getAllEmployees();
+        List<String> categoriesList = service.getAllCSP();
+
+        model.addAttribute("categoriesList", categoriesList);
         model.addAttribute("employees", employees);
-        model.addAttribute("newEmployee", new Employee());
+        model.addAttribute("newEmployee", new CreateEmployee());
         return "index";
     }
 
 
     @PostMapping("/addEmployee")
-    public String addEmployee(Model model, @ModelAttribute("newEmployee") RestEmployee newEmployee) throws IOException {
+    public String addEmployee(Model model, @ModelAttribute("newEmployee") CreateEmployee newEmployee) throws IOException {
         service.createEmployee(mapper.toDomain(newEmployee));
-        model.addAttribute("newEmployee", new Employee());
+        model.addAttribute("newEmployee", new CreateEmployee());
         return "redirect:/";
     }
 
@@ -42,7 +49,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/{id}/edit")
-    public String updateEmployee(@PathVariable("id") Integer id, @ModelAttribute("employee") Employee updatedEmployee) {
+    public String updateEmployee(@PathVariable("id") Integer id, @ModelAttribute("employee") Employee updatedEmployee) throws IOException {
         service.createEmployee(updatedEmployee);
         return "redirect:/";
     }

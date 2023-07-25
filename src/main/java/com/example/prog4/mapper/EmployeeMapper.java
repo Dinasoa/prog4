@@ -1,32 +1,82 @@
 package com.example.prog4.mapper;
 
-import com.example.prog4.controller.rest.RestEmployee;
+import com.example.prog4.controller.viewModel.CreateEmployee;
+import com.example.prog4.controller.viewModel.ViewEmployee;
+import com.example.prog4.model.CIN;
 import com.example.prog4.model.Employee;
+import com.example.prog4.model.PhoneNumber;
+import com.example.prog4.repository.CINRepository;
+import com.example.prog4.repository.PhoneNumberRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Base64;
 
 @Component
+@AllArgsConstructor
+@Slf4j
 public class EmployeeMapper {
 
-    public Employee toDomain(RestEmployee rest) throws IOException {
+    private PhoneNumberRepository phoneNumberRepository;
+    private CINRepository cinRepository;
+
+//    public ViewEmployee toViewEmployee(Employee employee){
+//        return ViewEmployee.builder()
+//                .categorieSocioProfessionnelle(String.valueOf(employee.getCategorieSocioProfesional()))
+//                .picture(employee.getPicture())
+//                .address(employee.getAddress())
+//                .sexe(String.valueOf(employee.getSexe()))
+//                .emailPerso(employee.getEmailPerso())
+//                .firstName(employee.getFirstName())
+//                .lastName(employee.getLastName())
+//                .birthDate(employee.getBirthDate())
+//                .CIN(String.valueOf(employee.getCIN()))
+//                .matricule(employee.getMatricule())
+//                .position(employee.getPosition())
+//                .phoneNumber(employee.getPhoneNumber().get(0).getPhoneNumber())
+//                .cnapsNumber(employee.getCnapsNumber())
+//                .build();
+//    }
+
+    public Employee toDomain(CreateEmployee rest) throws IOException {
         byte[] imageBytes = rest.getPicture().getBytes();
         String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
+        ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
+        PhoneNumber phoneNumber = PhoneNumber.builder().phoneNumber(rest.getPhoneNumber()).build();
+        if(phoneNumber != null){
+            phoneNumberRepository.save(phoneNumber);
+        }
+        phoneNumbers.add(phoneNumber);
+        CIN cin = CIN.builder()
+                .number(rest.getCINNUmber())
+                .issueDate(rest.getCINDate())
+                .issuePlace(rest.getCINDate())
+                .build();
+        if(cin != null){
+            cinRepository.save(cin);
+        }
+        log.info("CSP: " , rest.getCategorieSocioProfessionnelle());
         return Employee.builder()
                 .id(rest.getId())
                 .picture(encodedImage)
                 .lastName(rest.getLastName())
                 .firstName(rest.getFirstName())
                 .birthDate(rest.getBirthDate())
-                .phoneNumber(rest.getPhoneNumber())
-                .CIN(rest.getCIN())
+                .phoneNumber(phoneNumbers)
+                .CIN(cin)
                 .address(rest.getAddress())
                 .emailPro(rest.getEmailPro())
                 .emailPerso(rest.getEmailPerso())
                 .position(rest.getPosition())
                 .cnapsNumber(rest.getCnapsNumber())
                 .sexe(Employee.Sexe.valueOf(rest.getSexe()))
+                .departureDate(rest.getDepartureDate())
+                .hiringDate(rest.getHiringDate())
+//                .categorieSocioProfesional(Employee.CSP.valueOf(rest.getCategorieSocioProfessionnelle()))
                 .build();
     }
 }

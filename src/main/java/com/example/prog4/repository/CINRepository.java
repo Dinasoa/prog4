@@ -1,12 +1,10 @@
 package com.example.prog4.repository;
 
-import com.example.prog4.model.Employee;
+import com.example.prog4.model.CIN;
+import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-
+public interface CINRepository extends JpaRepository<CIN, Long> {
 }

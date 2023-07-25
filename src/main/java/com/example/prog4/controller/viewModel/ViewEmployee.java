@@ -1,26 +1,22 @@
-package com.example.prog4.controller.rest;
+package com.example.prog4.controller.viewModel;
 
-import com.example.prog4.model.PhoneNumber;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestEmployee {
-    private int id;
+public class ViewEmployee {
     private String matricule;
     private String firstName;
     private String lastName;
     private String birthDate;
-    private MultipartFile picture;
-    private List<PhoneNumber> phoneNumber;
+    private String picture;
+    private String phoneNumber;
     private String address;
     private String emailPerso;
     private String emailPro;
