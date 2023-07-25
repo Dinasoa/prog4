@@ -15,8 +15,8 @@
 
 <h1>List of Employees</h1>
 
-<form action="/search" method="get">
-    <label for="search" >Search</label>
+<form th:action="@{/search}" method="get">
+    <label for="search">Search</label>
     <div>
         <input type="search" name="word" id="search" >
         <button type="submit">Search</button>
@@ -99,7 +99,27 @@
             <a th:href="@{/employee-informations/{id}(id=${employee.id})}">View Details</a>
         </td>
     </tr>
+
 </table>
+
+<script th:inline="javascript">
+    function downloadCSV() {
+        fetch('/export-to-csv')
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'employees.csv';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error downloading CSV:', error));
+    }
+</script>
+<button onclick="downloadCSV()" class="btn btn-primary">Export to CSV</button>
 
 <h2>Add Employee</h2>
 <form th:action="@{/addEmployee}" th:object="${newEmployee}" method="post" enctype="multipart/form-data">
