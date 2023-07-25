@@ -46,6 +46,10 @@ public class EmployeeService {
         );
     }
 
+    public List<Employee> searchByKeyword(String keyword) {
+        return repository.searchByKeyword(keyword);
+    }
+
     public List<String> getAllCSP(){
         List<String> CSP = new ArrayList<>();
         CSP.add("AGRICULTURAL_WORKERS");

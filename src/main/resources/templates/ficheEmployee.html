@@ -6,6 +6,12 @@
     <link th:href="@{/styles/styles.css}" rel="stylesheet">
 </head>
 <body>
+<nav>
+  <h1>Welcome to our Company: <span th:text="${company.name}"></span></h1>
+  <td>
+    <img th:src="'data:image/jpeg;base64,' + ${company.logo}" />
+  </td>
+</nav>
 <table>
   <tr>
     <th>Profile Picture</th>

@@ -3,7 +3,9 @@ package com.example.prog4.controller;
 import com.example.prog4.controller.viewModel.CreateEmployee;
 import com.example.prog4.controller.viewModel.ViewEmployee;
 import com.example.prog4.mapper.EmployeeMapper;
+import com.example.prog4.model.Company;
 import com.example.prog4.model.Employee;
+import com.example.prog4.service.CompanyService;
 import com.example.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +24,22 @@ import java.util.stream.Collectors;
 public class EmployeeController {
     private EmployeeService service;
     private EmployeeMapper mapper;
+    private CompanyService companyService;
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Employee> employees = service.getAllEmployees();
+//        List<Employee> employees = service.getAllEmployees();
         List<ViewEmployee> viewEmployees = service.getAllEmployees()
                 .stream().map(employee -> mapper.toViewEmployee(employee)).toList();
         List<String> categoriesList = service.getAllCSP();
+        List<Company> companies = companyService.getCompanies();
+        if(companies.size() == 0 ){
+            companies.add(Company.builder()
+                    .name("NUMER")
+                    .build());
+        }
+
+        model.addAttribute("company", companies.get(companies.size() - 1));
 
         model.addAttribute("categoriesList", categoriesList);
         model.addAttribute("employees", viewEmployees);
@@ -45,6 +57,13 @@ public class EmployeeController {
 
     @GetMapping("/employees/{id}/edit")
     public String editEmployee(@PathVariable("id") Integer id, Model model) {
+        List<Company> companies = companyService.getCompanies();
+        companies.add(Company.builder()
+                .name("NUMER")
+                .build());
+        if(companies.size() > 0) {
+            model.addAttribute("company", companies.get(0));
+        }
         CreateEmployee employee = mapper.toCreateEmployee(service.getById(id));
         model.addAttribute("employee", employee);
         return "editEmployee";
@@ -60,11 +79,25 @@ public class EmployeeController {
 
     @GetMapping("/employee-informations/{id}")
     public String getEmployeeById(Model model, @PathVariable Integer id){
+        List<Company> companies = companyService.getCompanies();
+        companies.add(Company.builder()
+                .name("NUMER")
+                .build());
+        if(companies.size() > 0){
+            model.addAttribute("company", companies.get(0));
+        }
         if(id != null){
         ViewEmployee employee =  mapper.toViewEmployee(service.getById(id));
          model.addAttribute("employee", employee);
         }
         return "ficheEmployee";
+    }
+
+    @GetMapping("/search")
+    public String SearchPage(@RequestParam("word") String word, Model model){
+        List<ViewEmployee> employees = service.searchByKeyword(word).stream().map(employee -> mapper.toViewEmployee(employee)).toList();
+        model.addAttribute("employees", employees);
+        return "redirect:/";
     }
 }
 

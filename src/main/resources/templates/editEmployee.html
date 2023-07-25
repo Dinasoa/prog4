@@ -5,6 +5,12 @@
   <title>Edit Employee</title>
 </head>
 <body>
+<nav>
+  <h1>Welcome to our Company: <span th:text="${company.name}"></span></h1>
+  <td>
+    <img th:src="'data:image/jpeg;base64,' + ${company.logo}" />
+  </td>
+</nav>
 <h1>Edit Employee</h1>
 <form th:action="@{/employees/{id}/edit(id=${employee.id})}" th:object="${employee}" method="post" enctype="multipart/form-data">
   <input type="hidden" th:field="*{id}">
