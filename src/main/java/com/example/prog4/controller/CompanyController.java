@@ -22,7 +22,6 @@ public class CompanyController {
         private CompanyMapper mapper;
 
 
-
         @GetMapping("/company-form")
         public String showCompanyForm(Model model) {
             model.addAttribute("company", new ViewCompany());

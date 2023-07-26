@@ -1,0 +1,10 @@
+create sequence my_sequence;
+
+CREATE OR REPLACE FUNCTION generate_id_with_prefix()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.matricule := 'REF-000' || nextval('my_sequence');
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
