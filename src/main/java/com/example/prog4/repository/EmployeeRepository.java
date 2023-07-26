@@ -18,8 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             "OR LOWER(e.first_name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR CAST(e.sexe AS VARCHAR) = :keyword " +
             "OR LOWER(CONCAT(pn.country_code, ' ', pn.phone_number)) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
-            "AND (:startDate IS NULL OR e.hiring_date >= :startDate) " +
-            "AND (:endDate IS NULL OR e.departure_date <= :endDate)",
+            "AND ((:startDate IS NULL AND :endDate IS NULL) OR (e.hiring_date BETWEEN :startDate AND :endDate))",
             nativeQuery = true)
     List<Employee> searchByKeywordAndDateRange(@Param("keyword") String keyword,
                                                @Param("startDate") String startDate,
