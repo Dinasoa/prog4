@@ -88,8 +88,8 @@ public class EmployeeMapper {
                 .phoneNumber(rest.getPhoneNumber())
                 .countryCode(rest.getCountryCode())
                 .build();
-        PhoneNumber actualPhone = phoneNumberService.getByPhoneNumber(rest.getPhoneNumber());
-        if(phoneNumber != null || actualPhone == null && phoneNumber != actualPhone) {
+//        PhoneNumber actualPhone = phoneNumberService.getByPhoneNumber(rest.getPhoneNumber());
+        if(phoneNumber != null ) {
             phoneNumberRepository.save(phoneNumber);
         }
         phoneNumbers.add(phoneNumber);
