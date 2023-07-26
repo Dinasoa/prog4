@@ -60,6 +60,7 @@
         <th>Last Name</th>
         <th>Birthdate</th>
         <th>Matricule</th>
+        <th>Country Code</th>
         <th>Phone Number</th>
         <th>Address</th>
         <th>Personal Email</th>
@@ -84,7 +85,8 @@
         <td th:text="${employee.lastName}"></td>
         <td th:text="${employee.birthDate}"></td>
         <td th:text="${employee.matricule}"></td>
-        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.countryCode}"></td>
+        <td th:text="${employee.countryCode + ' ' + employee.phoneNumber}"></td>
         <td th:text="${employee.address}"></td>
         <td th:text="${employee.emailPerso}"></td>
         <td th:text="${employee.emailPro}"></td>
@@ -134,6 +136,9 @@
 
     <label for="birthDate">Date of Birth:</label>
     <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
+
+    <label for="countryCode">Country Code:</label>
+    <input type="text" id="countryCode" th:field="*{countryCode}" REQUIRED/><br/>
 
     <label for="phoneNumber">Phone Number:</label>
     <input type="text" id="phoneNumber" th:field="*{phoneNumber}" REQUIRED/><br/>

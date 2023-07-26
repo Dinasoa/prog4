@@ -10,27 +10,18 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    List<Employee> findAllByFirstNameContainingAndLastNameContainingAndSexeAndPositionContainingAndHiringDateBetweenAndDepartureDateBetween(
-            String firstName,
-            String lastName,
-            Employee.Sexe sex,
-            String position,
-            String hiringDateStart,
-            String hiringDateEnd,
-            String departureDateStart,
-            String departureDateEnd
-    );
 
-    @Query(value = "SELECT * FROM employee " +
-            "WHERE (LOWER(last_name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(first_name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR CAST(sexe AS VARCHAR) = :keyword) " +
-            "AND (:startDate IS NULL OR hiring_date >= :startDate) " +
-            "AND (:endDate IS NULL OR departure_date <= :endDate)",
+    @Query(value = "SELECT e.* FROM employee e " +
+            "INNER JOIN employee_phone_number epn ON e.id = epn.employee_id " +
+            "INNER JOIN phone_number pn ON epn.phone_number_id = pn.id " +
+            "WHERE (LOWER(e.last_name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(e.first_name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR CAST(e.sexe AS VARCHAR) = :keyword " +
+            "OR LOWER(CONCAT(pn.country_code, ' ', pn.phone_number)) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+            "AND (:startDate IS NULL OR e.hiring_date >= :startDate) " +
+            "AND (:endDate IS NULL OR e.departure_date <= :endDate)",
             nativeQuery = true)
     List<Employee> searchByKeywordAndDateRange(@Param("keyword") String keyword,
                                                @Param("startDate") String startDate,
                                                @Param("endDate") String endDate);
-
-
 }

@@ -71,7 +71,8 @@ public class EmployeeMapper {
                 .CINPLace(employee.getCIN() != null ? employee.getCIN().getIssuePlace() : null)
                 .matricule(employee.getMatricule())
                 .position(employee.getPosition())
-                .phoneNumber(String.valueOf(employee.getPhoneNumber().get(0).getPhoneNumber()))
+                .countryCode(employee.getPhoneNumber().get(0).getCountryCode() == null ? "" : employee.getPhoneNumber().get(0).getCountryCode())
+                .phoneNumber(employee.getPhoneNumber().get(0).getPhoneNumber())
                 .cnapsNumber(employee.getCnapsNumber())
                 .departureDate(employee.getDepartureDate())
                 .hiringDate(employee.getHiringDate())
@@ -83,7 +84,10 @@ public class EmployeeMapper {
         byte[] imageBytes = rest.getPicture().getBytes();
         String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
         ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
-        PhoneNumber phoneNumber = PhoneNumber.builder().phoneNumber(rest.getPhoneNumber()).build();
+        PhoneNumber phoneNumber = PhoneNumber.builder()
+                .phoneNumber(rest.getPhoneNumber())
+                .countryCode(rest.getCountryCode())
+                .build();
         PhoneNumber actualPhone = phoneNumberService.getByPhoneNumber(rest.getPhoneNumber());
         if(phoneNumber != null || actualPhone == null && phoneNumber != actualPhone) {
             phoneNumberRepository.save(phoneNumber);

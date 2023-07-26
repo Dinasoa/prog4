@@ -17,11 +17,11 @@ public class CreateEmployee {
     private String lastName;
     private String birthDate;
     private MultipartFile picture;
+    private String countryCode;
     private String phoneNumber;
     private String address;
     private String emailPerso;
     private String emailPro;
-//    TODO: SHOW THE CONTENT IN CIN
     private int CINNUmber;
     private String CINPLace;
     private String CINDate;

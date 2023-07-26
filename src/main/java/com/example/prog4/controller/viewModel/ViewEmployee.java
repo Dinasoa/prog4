@@ -18,6 +18,7 @@ public class ViewEmployee {
     private String lastName;
     private String birthDate;
     private String picture;
+    private String countryCode;
     private String phoneNumber;
     private String address;
     private String emailPerso;

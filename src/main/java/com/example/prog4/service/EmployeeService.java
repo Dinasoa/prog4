@@ -25,28 +25,6 @@ public class EmployeeService {
         return repository.findById(id).get();
     }
 
-    public List<Employee> getFilteredEmployees(
-            String firstName,
-            String lastName,
-            Employee.Sexe sex,
-            String position,
-            String hiringDateStart,
-            String hiringDateEnd,
-            String departureDateStart,
-            String departureDateEnd
-    ) {
-        return repository.findAllByFirstNameContainingAndLastNameContainingAndSexeAndPositionContainingAndHiringDateBetweenAndDepartureDateBetween(
-                firstName,
-                lastName,
-                sex,
-                position,
-                hiringDateStart,
-                hiringDateEnd,
-                departureDateStart,
-                departureDateEnd
-        );
-    }
-
     public List<Employee> searchByKeyword(String keyword, String startDate, String endDate) {
         return repository.searchByKeywordAndDateRange(keyword, startDate, endDate);
     }
