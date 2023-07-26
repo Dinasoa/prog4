@@ -23,30 +23,30 @@
     </div>
 </form>
 
-<form action="/sort" method="get" class="p-4 border border-gray-300 rounded-lg shadow-md">
+<form th:action="@{/sort}" method="get" >
     <div class="mb-4">
-        <label for="sortAttribute" class="block text-sm font-medium text-gray-700">Trier par :</label>
+        <label for="sortAttribute" > Sort by :</label>
         <select id="sortAttribute" name="sortAttribute" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            <option value="lastName">Nom</option>
-            <option value="firstName">Prénom</option>
-            <option value="sex">Sexe</option>
-            <option value="role">Fonction</option>
+            <option value="lastName">Last Name</option>
+            <option value="firstName">First Name</option>
+            <option value="sexe">Sex</option>
+            <option value="position">Position</option>
         </select>
     </div>
-    <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Ordre de tri :</label>
+    <div>
+        <label>Order by:</label>
         <div class="mt-1">
             <label for="radioButton1" class="inline-flex items-center">
                 <input type="radio" name="sortOrder" id="radioButton1" class="formbold-radio" value="asc">
-                <span class="ml-2 text-sm text-gray-700">Croissant</span>
+                <span>ASC</span>
             </label>
-            <label for="radioButton2" class="ml-4 inline-flex items-center">
+            <label for="radioButton2" >
                 <input type="radio" name="sortOrder" id="radioButton2" class="formbold-radio" value="desc">
-                <span class="ml-2 text-sm text-gray-700">Décroissant</span>
+                <span >DESC</span>
             </label>
         </div>
     </div>
-    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white font-medium rounded-lg py-2 px-4 sm:text-sm">
+    <button type="submit" >
         Trier
     </button>
 </form>
@@ -188,8 +188,21 @@
     <label for="cnapsNumber">CNAPS:</label>
     <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>
 
-    <label for="sexe">SEXE (H/F):</label>
-    <input type="text" id="sexe" th:field="*{sexe}"/><br/>
+    <label for="sexeSelect">SEXE (H/F):</label>
+    <select id="sexeSelect" onchange="updateSexe()" th:field="*{sexe}">
+        <option value="H">Homme</option>
+        <option value="F">Femme</option>
+    </select><br/>
+
+    <script th:inline="javascript">
+        function updateSexe() {
+            var selectElement = document.getElementById('sexeSelect');
+            var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+            document.getElementById('sexe').value = selectedValue;
+        }
+    </script>
+
+
 
     <label for="profileImage">Profile Image:</label>
     <input type="file" id="profileImage" name="profileImage" th:field="*{picture}"/><br/>

@@ -99,5 +99,14 @@ public class EmployeeController {
         model.addAttribute("employees", employees);
         return "redirect:/";
     }
+
+    @GetMapping("/sort")
+    public String SortPage(@RequestParam(value = "sortAttribute", defaultValue = "lastName") String sortAttribute,
+                           @RequestParam(value = "sortOrder", defaultValue = "asc") String sortOrder,
+                           Model model) {
+        List<Employee> employees = service.sort(sortOrder, sortAttribute);
+        model.addAttribute("employees", employees);
+        return "index";
+    }
 }
 
