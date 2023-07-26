@@ -15,18 +15,21 @@
 
 <h1>List of Employees</h1>
 
-<form th:action="@{/search}" method="get">
+<form th:action="@{/search}" method="post">
     <label for="search">Search</label>
     <div>
-        <input type="search" name="word" id="search" >
+        <input type="text" name="keyword" id="search" >
+        <input type="date" name="startDate" id="startDate" >
+        <input type="date" name="endDate" id="endDate" >
         <button type="submit">Search</button>
     </div>
 </form>
 
-<form th:action="@{/sort}" method="get" >
+
+<form th:action="@{/sort}" method="post" >
     <div class="mb-4">
         <label for="sortAttribute" > Sort by :</label>
-        <select id="sortAttribute" name="sortAttribute" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <select id="sortAttribute" name="sortAttribute">
             <option value="lastName">Last Name</option>
             <option value="firstName">First Name</option>
             <option value="sexe">Sex</option>
@@ -37,11 +40,11 @@
         <label>Order by:</label>
         <div class="mt-1">
             <label for="radioButton1" class="inline-flex items-center">
-                <input type="radio" name="sortOrder" id="radioButton1" class="formbold-radio" value="asc">
+                <input type="radio" name="sortOrder" id="radioButton1" value="asc">
                 <span>ASC</span>
             </label>
             <label for="radioButton2" >
-                <input type="radio" name="sortOrder" id="radioButton2" class="formbold-radio" value="desc">
+                <input type="radio" name="sortOrder" id="radioButton2" value="desc">
                 <span >DESC</span>
             </label>
         </div>
@@ -133,7 +136,7 @@
     <input type="date" id="birthDate" th:field="*{birthDate}"/><br/>
 
     <label for="phoneNumber">Phone Number:</label>
-    <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/><br/>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" REQUIRED/><br/>
 
     <label for="address">Address:</label>
     <input type="text" id="address" th:field="*{address}"/><br/>
@@ -166,7 +169,6 @@
     <input type="text" id="childrenNumber" th:field="*{childrenNumber}"/><br/>
 
     <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
-<!--    <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfesional}"/><br/>-->
 
     <select id="categorieSocioProfesional" onchange="updateCategory()" th:field="*{categorieSocioProfessionnelle}">
         <option value="AGRICULTURAL_WORKERS">AGRICULTURAL_WORKERS</option>
@@ -189,7 +191,7 @@
     <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>
 
     <label for="sexeSelect">SEXE (H/F):</label>
-    <select id="sexeSelect" onchange="updateSexe()" th:field="*{sexe}">
+    <select id="sexeSelect" onchange="updateSexe()" th:field="*{sexe}" required>
         <option value="H">Homme</option>
         <option value="F">Femme</option>
     </select><br/>

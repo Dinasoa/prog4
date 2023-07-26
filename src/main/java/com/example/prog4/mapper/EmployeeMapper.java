@@ -7,6 +7,7 @@ import com.example.prog4.model.Employee;
 import com.example.prog4.model.PhoneNumber;
 import com.example.prog4.repository.CINRepository;
 import com.example.prog4.repository.PhoneNumberRepository;
+import com.example.prog4.service.PhoneNumberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ public class EmployeeMapper {
 
     private PhoneNumberRepository phoneNumberRepository;
     private CINRepository cinRepository;
+    private PhoneNumberService phoneNumberService;
 
 
     public CreateEmployee toCreateEmployee(Employee employee){
@@ -82,7 +84,8 @@ public class EmployeeMapper {
         String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
         ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
         PhoneNumber phoneNumber = PhoneNumber.builder().phoneNumber(rest.getPhoneNumber()).build();
-        if(phoneNumber != null){
+        PhoneNumber actualPhone = phoneNumberService.getByPhoneNumber(rest.getPhoneNumber());
+        if(phoneNumber != null || actualPhone == null && phoneNumber != actualPhone) {
             phoneNumberRepository.save(phoneNumber);
         }
         phoneNumbers.add(phoneNumber);

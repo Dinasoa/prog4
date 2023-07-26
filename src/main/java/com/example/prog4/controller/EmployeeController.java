@@ -28,7 +28,6 @@ public class EmployeeController {
 
     @GetMapping("/")
     public String index(Model model) {
-//        List<Employee> employees = service.getAllEmployees();
         List<ViewEmployee> viewEmployees = service.getAllEmployees()
                 .stream().map(employee -> mapper.toViewEmployee(employee)).toList();
         List<String> categoriesList = service.getAllCSP();
@@ -93,19 +92,51 @@ public class EmployeeController {
         return "ficheEmployee";
     }
 
-    @GetMapping("/search")
-    public String SearchPage(@RequestParam("word") String word, Model model){
-        List<ViewEmployee> employees = service.searchByKeyword(word).stream().map(employee -> mapper.toViewEmployee(employee)).toList();
+    @PostMapping("/search")
+    public String SearchPage(@RequestParam("keyword") String word,
+                             @RequestParam(value = "startDate", required = false) String startDateStr,
+                             @RequestParam(value = "endDate", required = false) String endDateStr,
+                             Model model) {
+        List<ViewEmployee> employees = service.searchByKeyword(word, startDateStr, endDateStr).stream()
+                .map(employee -> mapper.toViewEmployee(employee))
+                .collect(Collectors.toList());
+
+        List<Company> companies = companyService.getCompanies();
+        if(companies.size() == 0 ){
+            companies.add(Company.builder()
+                    .name("NUMER")
+                    .build());
+        }
+
+        model.addAttribute("company", companies.get(companies.size() - 1));
+
+        model.addAttribute("newEmployee", new CreateEmployee());
         model.addAttribute("employees", employees);
-        return "redirect:/";
+        return "index";
     }
 
-    @GetMapping("/sort")
+
+    @PostMapping("/sort")
     public String SortPage(@RequestParam(value = "sortAttribute", defaultValue = "lastName") String sortAttribute,
                            @RequestParam(value = "sortOrder", defaultValue = "asc") String sortOrder,
                            Model model) {
-        List<Employee> employees = service.sort(sortOrder, sortAttribute);
+        List<ViewEmployee> employees = service.sort(sortOrder, sortAttribute).stream().map(employee -> mapper.toViewEmployee(employee)).toList();
+
+
+        List<Company> companies = companyService.getCompanies();
+        if(companies.size() == 0 ){
+            companies.add(Company.builder()
+                    .name("NUMER")
+                    .build());
+        }
+
+        model.addAttribute("company", companies.get(companies.size() - 1));
+
+        model.addAttribute("newEmployee", new CreateEmployee());
         model.addAttribute("employees", employees);
+
+        model.addAttribute("sortAttribute", sortAttribute);
+        model.addAttribute("sortOrder", sortOrder);
         return "index";
     }
 }

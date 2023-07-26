@@ -47,8 +47,8 @@ public class EmployeeService {
         );
     }
 
-    public List<Employee> searchByKeyword(String keyword) {
-        return repository.searchByKeyword(keyword);
+    public List<Employee> searchByKeyword(String keyword, String startDate, String endDate) {
+        return repository.searchByKeywordAndDateRange(keyword, startDate, endDate);
     }
 
     public List<String> getAllCSP(){
@@ -61,9 +61,11 @@ public class EmployeeService {
         return CSP;
     }
 
-    public List<Employee> sort(String sortOrder, String atr) {
-        Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(atr).ascending() :
-                Sort.by(atr).descending();
+
+    public List<Employee> sort(String order, String attribute) {
+        Sort.Direction direction = order.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+
+        Sort sort = Sort.by(direction, attribute);
 
         return repository.findAll(sort);
     }
