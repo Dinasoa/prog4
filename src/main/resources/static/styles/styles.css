@@ -1,59 +1,112 @@
 /* styles.css */
 
-/* Style de base */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-}
-
-h1, h2 {
-  color: #333;
-}
-
+/* Style pour le tableau */
 table {
-  width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
 th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
   padding: 8px;
-  border: 1px solid #ccc;
 }
 
 th {
   background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: left;
 }
 
-/* Style du formulaire */
+/* Style pour les liens */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #020202;
+  text-decoration: underline;
+}
+
+/* Style pour les boutons */
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Style pour le formulaire */
 form {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
+  display: inline-block;
+  width: 120px;
   font-weight: bold;
 }
 
 input[type="text"],
 input[type="date"],
-input[type="file"] {
+input[type="file"],
+select {
   width: 200px;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 4px;
+  margin-bottom: 8px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
 }
 
 input[type="submit"] {
-  padding: 8px 16px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #007bff;
   border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-input[type="submit"]:hover {
-  background-color: #45a049;
+/* Style pour le titre */
+h1, h2 {
+  color: #020202;
+  margin-bottom: 16px;
+}
+
+/* Style pour la navigation */
+nav {
+  background-color: #e3e7ea;
+  color: #020202;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  margin: 0;
+}
+
+nav img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 16px;
 }

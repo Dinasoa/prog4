@@ -62,7 +62,13 @@
   <input type="text" id="childrenNumber" th:field="*{childrenNumber}"/><br/>
 
   <label for="categorieSocioProfesional">Categorie Socio Pro:</label>
-  <input type="text" id="categorieSocioProfesional" th:field="*{categorieSocioProfessionnelle}"/><br/>
+  <select id="categorieSocioProfesional" onchange="updateCategory()" th:field="*{categorieSocioProfessionnelle}">
+    <option value="AGRICULTURAL_WORKERS">AGRICULTURAL_WORKERS</option>
+    <option value="CRAFTSMEN_AND_ARTISANS">CRAFTSMEN_AND_ARTISANS</option>
+    <option value="TRADERS_AND_MERCHANTS">TRADERS_AND_MERCHANTS</option>
+    <option value="CIVIL_SERVANTS_AND_PROFESSIONALS">CIVIL_SERVANTS_AND_PROFESSIONALS</option>
+    <option value="UNSKILLED_LABORERS">UNSKILLED_LABORERS</option>
+  </select><br/>
 
   <label for="cnapsNumber">CNAPS:</label>
   <input type="text" id="cnapsNumber" th:field="*{cnapsNumber}"/><br/>

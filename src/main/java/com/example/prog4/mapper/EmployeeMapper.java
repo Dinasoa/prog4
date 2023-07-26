@@ -45,7 +45,7 @@ public class EmployeeMapper {
                 .CINPLace(employee.getCIN() != null ? employee.getCIN().getIssuePlace() : null)
                 .position(employee.getPosition())
                 .childrenNumber(employee.getChildrenNumber())
-//                .categorieSocioProfessionnelle(String.valueOf(employee.getCategorieSocioProfesional()))
+                .categorieSocioProfessionnelle(String.valueOf(employee.getCategorieSocioProfesional()))
                 .cnapsNumber(employee.getCnapsNumber())
                 .hiringDate(employee.getHiringDate())
                 .departureDate(employee.getDepartureDate())
@@ -111,7 +111,7 @@ public class EmployeeMapper {
                 .sexe(Employee.Sexe.valueOf(rest.getSexe()))
                 .departureDate(rest.getDepartureDate())
                 .hiringDate(rest.getHiringDate())
-//                .categorieSocioProfesional(Employee.CSP.valueOf(rest.getCategorieSocioProfessionnelle()))
+                .categorieSocioProfesional(Employee.CSP.valueOf(rest.getCategorieSocioProfessionnelle()))
                 .build();
     }
 }

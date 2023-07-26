@@ -58,6 +58,7 @@ public class CsvExportController {
         employees.add("Hiring Date: " + employee.getHiringDate());
         employees.add("Email Perso: " + employee.getEmailPerso());
         employees.add("Email Pro: " + employee.getEmailPro());
+        employees.add("Phone Number: " + employee.getPhoneNumber());
 
         return employees;
 
