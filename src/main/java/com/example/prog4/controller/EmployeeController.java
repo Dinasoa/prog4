@@ -26,7 +26,7 @@ public class EmployeeController {
     private EmployeeMapper mapper;
     private CompanyService companyService;
 
-    @GetMapping("/")
+    @GetMapping("/employees")
     public String index(Model model) {
         List<ViewEmployee> viewEmployees = service.getAllEmployees()
                 .stream().map(employee -> mapper.toViewEmployee(employee)).toList();
@@ -51,7 +51,7 @@ public class EmployeeController {
     public String addEmployee(Model model, @ModelAttribute("newEmployee") CreateEmployee newEmployee) throws IOException {
         service.createEmployee(mapper.toDomain(newEmployee));
         model.addAttribute("newEmployee", new CreateEmployee());
-        return "redirect:/";
+        return "redirect:/employees";
     }
 
     @GetMapping("/employees/{id}/edit")
@@ -72,7 +72,7 @@ public class EmployeeController {
     public String updateEmployee(Model model, @PathVariable("id") Integer id, @ModelAttribute("employee") CreateEmployee updatedEmployee) throws IOException {
         service.createEmployee(mapper.toDomain(updatedEmployee));
         model.addAttribute("newEmployee", new CreateEmployee());
-        return "redirect:/";
+        return "redirect:/employees";
     }
 
 
