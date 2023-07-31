@@ -4,7 +4,6 @@ import com.example.prog4.controller.viewModel.CreateEmployee;
 import com.example.prog4.controller.viewModel.ViewEmployee;
 import com.example.prog4.mapper.EmployeeMapper;
 import com.example.prog4.model.Company;
-import com.example.prog4.model.Employee;
 import com.example.prog4.service.CompanyService;
 import com.example.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -25,6 +24,7 @@ public class EmployeeController {
     private EmployeeService service;
     private EmployeeMapper mapper;
     private CompanyService companyService;
+
 
     @GetMapping("/employees")
     public String index(Model model) {

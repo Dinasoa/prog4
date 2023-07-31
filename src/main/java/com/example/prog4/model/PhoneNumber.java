@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
-@Table(name = "phoneNumber")
+@Table(name = "phone_number", uniqueConstraints = @UniqueConstraint(columnNames = { "countryCode", "phoneNumber" }))
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
