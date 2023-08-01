@@ -2,7 +2,6 @@ package com.example.prog4.controller;
 
 import com.example.prog4.controller.viewModel.ViewCompany;
 import com.example.prog4.mapper.CompanyMapper;
-import com.example.prog4.model.Company;
 import com.example.prog4.service.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

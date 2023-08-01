@@ -4,14 +4,17 @@ import com.example.prog4.controller.viewModel.CreateEmployee;
 import com.example.prog4.controller.viewModel.ViewEmployee;
 import com.example.prog4.mapper.EmployeeMapper;
 import com.example.prog4.model.Company;
+import com.example.prog4.service.AuthService;
 import com.example.prog4.service.CompanyService;
 import com.example.prog4.service.EmployeeService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.ForbiddenException;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -24,10 +27,16 @@ public class EmployeeController {
     private EmployeeService service;
     private EmployeeMapper mapper;
     private CompanyService companyService;
+    private AuthService authService;
 
 
     @GetMapping("/employees")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         List<ViewEmployee> viewEmployees = service.getAllEmployees()
                 .stream().map(employee -> mapper.toViewEmployee(employee)).toList();
         List<String> categoriesList = service.getAllCSP();
@@ -48,14 +57,24 @@ public class EmployeeController {
 
 
     @PostMapping("/addEmployee")
-    public String addEmployee(Model model, @ModelAttribute("newEmployee") CreateEmployee newEmployee) throws IOException {
+    public String addEmployee(Model model, @ModelAttribute("newEmployee") CreateEmployee newEmployee, HttpSession session) throws IOException {
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         service.createEmployee(mapper.toDomain(newEmployee));
         model.addAttribute("newEmployee", new CreateEmployee());
         return "redirect:/employees";
     }
 
     @GetMapping("/employees/{id}/edit")
-    public String editEmployee(@PathVariable("id") Integer id, Model model) {
+    public String editEmployee(@PathVariable("id") Integer id, Model model, HttpSession session) {
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         List<Company> companies = companyService.getCompanies();
         companies.add(Company.builder()
                 .name("NUMER")
@@ -69,7 +88,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/{id}/edit")
-    public String updateEmployee(Model model, @PathVariable("id") Integer id, @ModelAttribute("employee") CreateEmployee updatedEmployee) throws IOException {
+    public String updateEmployee(Model model, @PathVariable("id") Integer id, @ModelAttribute("employee") CreateEmployee updatedEmployee, HttpSession session) throws IOException {
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         service.createEmployee(mapper.toDomain(updatedEmployee));
         model.addAttribute("newEmployee", new CreateEmployee());
         return "redirect:/employees";
@@ -77,7 +101,12 @@ public class EmployeeController {
 
 
     @GetMapping("/employee-informations/{id}")
-    public String getEmployeeById(Model model, @PathVariable Integer id){
+    public String getEmployeeById(Model model, @PathVariable Integer id, HttpSession session){
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         List<Company> companies = companyService.getCompanies();
         companies.add(Company.builder()
                 .name("NUMER")
@@ -96,7 +125,12 @@ public class EmployeeController {
     public String SearchPage(@RequestParam("keyword") String word,
                              @RequestParam(value = "startDate", required = false) String startDateStr,
                              @RequestParam(value = "endDate", required = false) String endDateStr,
-                             Model model) {
+                             Model model, HttpSession session) {
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
         List<ViewEmployee> employees = service.searchByKeyword(word, startDateStr, endDateStr).stream()
                 .map(employee -> mapper.toViewEmployee(employee))
                 .collect(Collectors.toList());
@@ -119,9 +153,15 @@ public class EmployeeController {
     @PostMapping("/sort")
     public String SortPage(@RequestParam(value = "sortAttribute", defaultValue = "lastName") String sortAttribute,
                            @RequestParam(value = "sortOrder", defaultValue = "asc") String sortOrder,
-                           Model model) {
-        List<ViewEmployee> employees = service.sort(sortOrder, sortAttribute).stream().map(employee -> mapper.toViewEmployee(employee)).toList();
+                           Model model, HttpSession session) {
 
+        try{
+            authService.isAuthenticated(session);
+        } catch (Exception e){
+            throw new ForbiddenException();
+        }
+
+        List<ViewEmployee> employees = service.sort(sortOrder, sortAttribute).stream().map(employee -> mapper.toViewEmployee(employee)).toList();
 
         List<Company> companies = companyService.getCompanies();
         if(companies.size() == 0 ){

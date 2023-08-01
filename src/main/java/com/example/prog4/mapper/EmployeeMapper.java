@@ -52,6 +52,8 @@ public class EmployeeMapper {
                 .hiringDate(employee.getHiringDate())
                 .departureDate(employee.getDepartureDate())
                 .sexe(String.valueOf(employee.getSexe()))
+                .username(employee.getUsername())
+                .password(employee.getPassword())
                 .build();
     }
     public ViewEmployee toViewEmployee(Employee employee){
@@ -77,6 +79,8 @@ public class EmployeeMapper {
                 .departureDate(employee.getDepartureDate())
                 .hiringDate(employee.getHiringDate())
                 .matricule(employee.getMatricule())
+                .username(employee.getUsername())
+                .password(employee.getPassword())
                 .build();
     }
 
@@ -119,6 +123,8 @@ public class EmployeeMapper {
                 .departureDate(rest.getDepartureDate())
                 .hiringDate(rest.getHiringDate())
                 .categorieSocioProfesional(Employee.CSP.valueOf(rest.getCategorieSocioProfessionnelle()))
+                .username(rest.getUsername())
+                .password(rest.getPassword())
                 .build();
     }
 }

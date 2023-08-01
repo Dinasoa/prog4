@@ -23,4 +23,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> searchByKeywordAndDateRange(@Param("keyword") String keyword,
                                                @Param("startDate") String startDate,
                                                @Param("endDate") String endDate);
+
+    Employee findByUsernameAndPassword(String username, String password);
+
+    Employee getEmployeeByUsername(String username);
 }

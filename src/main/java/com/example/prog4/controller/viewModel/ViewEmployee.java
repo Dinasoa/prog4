@@ -33,4 +33,6 @@ public class ViewEmployee {
     private String hiringDate;
     private String departureDate;
     private String sexe;
+    private String username;
+    private String password;
 }

@@ -38,6 +38,8 @@ public class Employee {
     private CSP categorieSocioProfesional;
     private int cnapsNumber;
     private Sexe sexe;
+    private String username;
+    private String password;
     public enum Sexe{
         H,F;
     }
