@@ -122,7 +122,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/search")
-    public String SearchPage(@RequestParam("keyword") String word,
+    public String SearchPage(@RequestParam(value = "keyword", required = false) String word,
                              @RequestParam(value = "startDate", required = false) String startDateStr,
                              @RequestParam(value = "endDate", required = false) String endDateStr,
                              Model model, HttpSession session) {
@@ -131,6 +131,9 @@ public class EmployeeController {
         } catch (Exception e){
             throw new ForbiddenException();
         }
+
+        log.info("Word to search:{} " , word);
+
         List<ViewEmployee> employees = service.searchByKeyword(word, startDateStr, endDateStr).stream()
                 .map(employee -> mapper.toViewEmployee(employee))
                 .collect(Collectors.toList());

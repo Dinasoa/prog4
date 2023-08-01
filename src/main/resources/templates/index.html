@@ -16,9 +16,9 @@
 <form th:action="@{/search}" method="post">
     <label for="search">Search</label>
     <div>
-        <input type="text" name="keyword" id="search" >
-        <input type="date" name="startDate" id="startDate" >
-        <input type="date" name="endDate" id="endDate" >
+        <input type="text" th:name="keyword" id="search" >
+        <input type="date" th:name="startDate" id="startDate" >
+        <input type="date" th:name="endDate" id="endDate" >
         <button type="submit">Search</button>
     </div>
 </form>

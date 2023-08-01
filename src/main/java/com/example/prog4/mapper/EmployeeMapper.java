@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -71,7 +72,7 @@ public class EmployeeMapper {
                 .CINDate(employee.getCIN() != null ? employee.getCIN().getIssueDate() : null)
                 .CINNumber(employee.getCIN() != null ? Optional.ofNullable(employee.getCIN().getNumber()).orElse(null) : null)
                 .CINPLace(employee.getCIN() != null ? employee.getCIN().getIssuePlace() : null)
-                .matricule(employee.getMatricule())
+                .matricule(employee.getMatricule() != null ? employee.getMatricule() : "REF-" + UUID.randomUUID().toString())
                 .position(employee.getPosition())
                 .countryCode(employee.getPhoneNumber().get(0).getCountryCode() == null ? "" : employee.getPhoneNumber().get(0).getCountryCode())
                 .phoneNumber(employee.getPhoneNumber().get(0).getPhoneNumber())
@@ -80,7 +81,7 @@ public class EmployeeMapper {
                 .hiringDate(employee.getHiringDate())
                 .matricule(employee.getMatricule())
                 .username(employee.getUsername())
-                .password(employee.getPassword())
+//                .password(employee.getPassword())
                 .build();
     }
 
